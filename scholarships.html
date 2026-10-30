@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scholarships | ScholarMate AI</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">S</div>
+        <div>
+          <div class="brand-name">ScholarMate AI</div>
+          <div class="brand-subtitle">Opportunity explorer</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="./index.html">Home</a>
+        <a href="./dashboard.html">Dashboard</a>
+        <a href="./profile.html">Student Profile</a>
+        <a class="active" href="./scholarships.html">Scholarships</a>
+        <a href="./eligibility.html">Eligibility</a>
+        <a href="./documents.html">Documents</a>
+        <a href="./tracker.html">Tracker</a>
+      </nav>
+
+      <div class="sidebar-badge">
+        Demonstration data only
+      </div>
+    </aside>
+
+    <main class="page-content">
+      <header class="page-header">
+        <div>
+          <p class="eyebrow">Explore</p>
+          <h1>Scholarship explorer</h1>
+        </div>
+        <a class="button button-primary" href="./eligibility.html">Check Eligibility</a>
+      </header>
+
+      <section class="panel">
+        <div class="filter-grid">
+          <div class="field">
+            <label for="scholarship-search">Search</label>
+            <input id="scholarship-search" type="search" placeholder="Search scholarship name or provider" />
+          </div>
+
+          <div class="field">
+            <label for="course-filter">Course</label>
+            <select id="course-filter">
+              <option value="">All courses</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="state-filter">State</label>
+            <select id="state-filter">
+              <option value="">All states</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="sort-select">Sort by</label>
+            <select id="sort-select">
+              <option value="deadline">Deadline</option>
+              <option value="name">Name</option>
+              <option value="minMarks">Minimum marks</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section id="scholarship-list" class="card-grid"></section>
+    </main>
+  </div>
+
+  <script src="./js/app.js"></script>
+  <script src="./js/scholarships.js"></script>
+</body>
+</html>

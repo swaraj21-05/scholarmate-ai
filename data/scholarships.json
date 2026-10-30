@@ -1,0 +1,69 @@
+[
+  {
+    "id": "scholarship-merit-excellence-grant",
+    "name": "Merit Excellence Grant",
+    "provider": "State Education Board",
+    "minMarks": 85,
+    "maxAnnualIncome": 400000,
+    "eligibleCourses": ["Computer Science", "Engineering", "Biotechnology"],
+    "eligibleStates": ["Karnataka", "Tamil Nadu", "Delhi"],
+    "studyYear": "3",
+    "requiredDocuments": [
+      "Income certificate",
+      "Previous examination marksheet",
+      "Bonafide certificate"
+    ],
+    "additionalConditions": [
+      "Must be in good academic standing and not receiving another state grant"
+    ],
+    "deadline": "2026-11-30",
+    "sourceUrl": "https://example.com/demo/merit-excellence-grant",
+    "status": "Demonstration data",
+    "demoStatus": "Demonstration data"
+  },
+  {
+    "id": "scholarship-state-education-support",
+    "name": "State Education Support Fund",
+    "provider": "Regional Student Welfare Council",
+    "minMarks": 75,
+    "maxAnnualIncome": 300000,
+    "eligibleCourses": ["Computer Science", "Economics", "Business Administration"],
+    "eligibleStates": ["Karnataka", "Maharashtra", "Kerala"],
+    "studyYear": "2",
+    "requiredDocuments": [
+      "Income certificate",
+      "Domicile certificate",
+      "Identity proof"
+    ],
+    "additionalConditions": [
+      "Must have a state domicile and complete community service hours"
+    ],
+    "deadline": "2026-12-15",
+    "sourceUrl": "https://example.com/demo/state-education-support",
+    "status": "Demonstration data",
+    "demoStatus": "Demonstration data"
+  },
+  {
+    "id": "scholarship-research-future-fund",
+    "name": "Research Future Fund",
+    "provider": "Academic Innovation Foundation",
+    "minMarks": 90,
+    "maxAnnualIncome": 600000,
+    "eligibleCourses": ["Engineering", "Biotechnology", "Economics"],
+    "eligibleStates": ["Delhi", "West Bengal", "Karnataka"],
+    "studyYear": "4",
+    "requiredDocuments": [
+      "Previous examination marksheet",
+      "Bonafide certificate",
+      "Bank account proof",
+      "Other scholarship-specific documents"
+    ],
+    "additionalConditions": [
+      "Must submit a short research proposal or project summary"
+    ],
+    "deadline": "2027-01-12",
+    "sourceUrl": "https://example.com/demo/research-future-fund",
+    "status": "Demonstration data",
+    "demoStatus": "Demonstration data"
+  }
+]

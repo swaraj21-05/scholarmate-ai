@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Documents | ScholarMate AI</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">S</div>
+        <div>
+          <div class="brand-name">ScholarMate AI</div>
+          <div class="brand-subtitle">Document checklist</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="./index.html">Home</a>
+        <a href="./dashboard.html">Dashboard</a>
+        <a href="./profile.html">Student Profile</a>
+        <a href="./scholarships.html">Scholarships</a>
+        <a href="./eligibility.html">Eligibility</a>
+        <a class="active" href="./documents.html">Documents</a>
+        <a href="./tracker.html">Tracker</a>
+      </nav>
+
+      <div class="sidebar-badge">
+        Manual status update only
+      </div>
+    </aside>
+
+    <main class="page-content">
+      <header class="page-header">
+        <div>
+          <p class="eyebrow">Document assistant</p>
+          <h1>Required documents checklist</h1>
+        </div>
+        <a class="button button-secondary" href="./eligibility.html">Back to eligibility</a>
+      </header>
+
+      <section class="panel">
+        <div class="form-grid single-row">
+          <div class="field">
+            <label for="document-scholarship">Scholarship</label>
+            <select id="document-scholarship"></select>
+          </div>
+        </div>
+      </section>
+
+      <section id="document-checklist" class="panel"></section>
+    </main>
+  </div>
+
+  <script src="./js/app.js"></script>
+  <script src="./js/documents.js"></script>
+</body>
+</html>

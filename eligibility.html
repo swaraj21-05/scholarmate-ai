@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eligibility | ScholarMate AI</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">S</div>
+        <div>
+          <div class="brand-name">ScholarMate AI</div>
+          <div class="brand-subtitle">Rule comparison</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="./index.html">Home</a>
+        <a href="./dashboard.html">Dashboard</a>
+        <a href="./profile.html">Student Profile</a>
+        <a href="./scholarships.html">Scholarships</a>
+        <a class="active" href="./eligibility.html">Eligibility</a>
+        <a href="./documents.html">Documents</a>
+        <a href="./tracker.html">Tracker</a>
+      </nav>
+
+      <div class="sidebar-badge">
+        Transparent rule engine
+      </div>
+    </aside>
+
+    <main class="page-content">
+      <header class="page-header">
+        <div>
+          <p class="eyebrow">Eligibility engine</p>
+          <h1>Scholarship comparison</h1>
+        </div>
+        <a class="button button-secondary" href="./scholarships.html">Browse Scholarships</a>
+      </header>
+
+      <section class="panel">
+        <div class="form-grid single-row">
+          <div class="field">
+            <label for="selected-scholarship">Selected scholarship</label>
+            <select id="selected-scholarship"></select>
+          </div>
+          <div class="field">
+            <button id="run-eligibility" class="button button-primary">Run eligibility check</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="eligibility-summary" class="panel"></section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h3>Rule-by-rule comparison</h3>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Requirement</th>
+                <th>Scholarship Rule</th>
+                <th>Student Value</th>
+                <th>Result</th>
+                <th>Explanation</th>
+              </tr>
+            </thead>
+            <tbody id="eligibility-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="./js/app.js"></script>
+  <script src="./js/eligibility.js"></script>
+</body>
+</html>

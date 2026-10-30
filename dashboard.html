@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | ScholarMate AI</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">S</div>
+        <div>
+          <div class="brand-name">ScholarMate AI</div>
+          <div class="brand-subtitle">Demo dashboard</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="./index.html">Home</a>
+        <a class="active" href="./dashboard.html">Dashboard</a>
+        <a href="./profile.html">Student Profile</a>
+        <a href="./scholarships.html">Scholarships</a>
+        <a href="./eligibility.html">Eligibility</a>
+        <a href="./documents.html">Documents</a>
+        <a href="./tracker.html">Tracker</a>
+      </nav>
+
+      <div class="sidebar-badge">
+        Prototype demo data
+      </div>
+    </aside>
+
+    <main class="page-content">
+      <header class="page-header">
+        <div>
+          <p class="eyebrow">Welcome</p>
+          <h1 id="welcome-name">Student Dashboard</h1>
+        </div>
+        <a class="button button-primary" href="./profile.html">Update Profile</a>
+      </header>
+
+      <section class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-label">Profile completion</div>
+          <div class="stat-value" id="profile-completion">0%</div>
+          <div class="stat-trend">Based on saved profile data</div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-label">Scholarships checked</div>
+          <div class="stat-value" id="scholarships-checked">0</div>
+          <div class="stat-trend">Eligibility runs</div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-label">Matching scholarships</div>
+          <div class="stat-value" id="matching-scholarships">0</div>
+          <div class="stat-trend">Eligible under current profile</div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-label">Missing documents</div>
+          <div class="stat-value" id="missing-documents">0</div>
+          <div class="stat-trend">Across saved scholarship checks</div>
+        </article>
+      </section>
+
+      <section class="dashboard-grid">
+        <article class="panel">
+          <div class="panel-header">
+            <h3>Upcoming deadlines</h3>
+          </div>
+          <div id="deadline-list" class="list-stack"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <h3>Saved scholarships</h3>
+          </div>
+          <div id="saved-scholarships-list" class="list-stack"></div>
+        </article>
+      </section>
+
+      <section class="dashboard-grid">
+        <article class="panel">
+          <div class="panel-header">
+            <h3>Recent activity</h3>
+          </div>
+          <div id="recent-activity" class="list-stack"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <h3>Quick overview</h3>
+          </div>
+          <div class="quick-overview">
+            <div class="overview-item">
+              <span>Saved scholarships</span>
+              <strong id="saved-count">0</strong>
+            </div>
+            <div class="overview-item">
+              <span>Selected scholarship</span>
+              <strong id="selected-scholarship">None</strong>
+            </div>
+            <div class="overview-item">
+              <span>Current result</span>
+              <strong id="current-result">Not checked</strong>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script src="./js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      await fetchScholarships();
+      const profile = getProfile();
+      const welcome = document.getElementById('welcome-name');
+      welcome.textContent = `Welcome, ${profile.name || 'Student'}`;
+
+      const completion = calculateProfileCompletion(profile);
+      document.getElementById('profile-completion').textContent = completion + '%';
+
+      const totalChecked = getEligibilityHistory().length;
+      const matching = getEligibilityHistory().filter(item => item.result === 'ELIGIBLE_FOR_LISTED_RULES').length;
+      document.getElementById('scholarships-checked').textContent = totalChecked;
+      document.getElementById('matching-scholarships').textContent = matching;
+
+      const saved = getSavedScholarships();
+      document.getElementById('saved-count').textContent = saved.length;
+
+      const docs = getDocumentStatuses();
+      let missing = 0;
+      Object.values(docs).forEach(item => {
+        Object.values(item || {}).forEach(status => {
+          if (status === 'missing') missing++;
+        });
+      });
+      document.getElementById('missing-documents').textContent = missing;
+
+      const scholarships = getScholarships();
+      const deadlineList = document.getElementById('deadline-list');
+      const upcoming = [...scholarships].sort((a, b) => new Date(a.deadline) - new Date(b.deadline)).slice(0, 4);
+
+      deadlineList.innerHTML = upcoming.length
+        ? upcoming.map(s => `
+          <div class="list-item">
+            <div>
+              <strong>${s.name}</strong>
+              <small>${formatDate(s.deadline)}</small>
+            </div>
+            <span class="badge badge-neutral">${s.provider}</span>
+          </div>
+        `).join('')
+        : '<div class="empty-state">No upcoming deadlines available.</div>';
+
+      const savedList = document.getElementById('saved-scholarships-list');
+      savedList.innerHTML = saved.length
+        ? saved.map(s => `
+          <div class="list-item">
+            <div>
+              <strong>${s.name}</strong>
+              <small>${s.provider}</small>
+            </div>
+            <span class="badge badge-primary">${s.progress || 'Interested'}</span>
+          </div>
+        `).join('')
+        : '<div class="empty-state">No saved scholarships yet.</div>';
+
+      const recent = getActivityLog();
+      document.getElementById('recent-activity').innerHTML = recent.length
+        ? recent.slice(0, 5).map(item => `
+          <div class="list-item">
+            <div>
+              <strong>${item.label}</strong>
+              <small>${item.time || 'Recently'}</small>
+            </div>
+          </div>
+        `).join('')
+        : '<div class="empty-state">No recent activity recorded.</div>';
+
+      const selected = getSelectedScholarship();
+      document.getElementById('selected-scholarship').textContent = selected ? selected.name : 'None';
+      const lastResult = getLastEligibilityResult();
+      document.getElementById('current-result').textContent = lastResult ? lastResult.result : 'Not checked';
+    });
+  </script>
+</body>
+</html>
